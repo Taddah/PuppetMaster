@@ -35,7 +35,10 @@ module.exports = class CitizenCommand extends Command {
             }, function(error, response, body){
                 var regex = 'profile\/([0-9]{1,})'
                 var result = body.match(regex);
-                callback(result[1]);
+                if(result != null)
+                    callback(result[1]);
+                else
+                    callback(-1)
             });
         }
         else{
@@ -47,6 +50,11 @@ module.exports = class CitizenCommand extends Command {
 
         //Name is not the ID then let's get the ID 
         this.getId(name, function(id){
+
+            if(id === -1){
+                return msg.say('Sorry, I don`t know this citizen');
+            }
+
             var url = "https://www.erev2.com/en/api/citizen/" + id;
 
             request({

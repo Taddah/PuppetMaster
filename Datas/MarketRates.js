@@ -45,11 +45,6 @@ function updateRates(){
                 else{
                     console.log(error);
                 }
-
-                if(rates.length === countryName().length -1){
-                    console.log("rates updated");
-                }
-                
             });
         }
     });

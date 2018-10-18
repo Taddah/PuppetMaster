@@ -13,11 +13,13 @@ const client = new Commando.Client({
 
 client.registry
     // Registers all built-in groups, commands, and argument types
-    .registerDefaults()
+    
     .registerGroups([
         ['citizen', 'Citizen related commands'],
-        ['market', 'Market related commands']
+        ['market', 'Market related commands'],
+        ['country', 'Country related commands']
     ])
+    .registerDefaults()
     // Registers all of your commands in the ./commands/ directory
     .registerCommandsIn(path.join(__dirname, 'commands'));
 
@@ -31,4 +33,4 @@ client.login(config.token);
 
 //Get monetary rates and then update every hour
 updateRates();
-setInterval(updateRates, 3600000);
+setInterval(updateRates, 36000000);
