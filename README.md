@@ -4,6 +4,15 @@
 1. First you must create and fill the config file (config.json) -> look at the example
 2. Install Nodejs and use 'npm start' in your terminal to start the bot
 
+For Debian & Ubuntu user : https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions
+
+Also in case of problem with sqlite, comment these lines in index.js
+```
+client.setProvider(
+    sqlite.open(path.join(__dirname, 'settings.sqlite3')).then(db => new Commando.SQLiteProvider(db))
+).catch(console.error);
+```
+
 config.json example
 ```
 { 
