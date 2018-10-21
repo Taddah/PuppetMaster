@@ -14,7 +14,7 @@ exports.countryName = function() {
                 "Brazil","Bulgaria","Canada","Chile","China","Colombia","Croatia","Cuba","Czech Republic","Denmark","Egypt","Estonia","Finland","France",
                 "Georgia","Germany","Greece","Hungary", "Iceland", "India","Indonesia","Iran","Ireland","Israel","Italy","Japan", "Kazakhstan", "Latvia","Lithuania","Malaysia","Mexico","Montenegro",
                 "Netherlands","New Zealand","North Korea","Norway","Pakistan","Paraguay","Peru","Philippines","Poland","Portugal", "Qatar", "Taiwan",
-                "FYROM","Moldova","Romania","Russia","Saudi Arabia", "Senegal", "Serbia","Slovakia","Slovenia","South Africa",
+                "FYROM","Romania","Russia","Saudi Arabia", "Senegal", "Serbia","Slovakia","Slovenia","South Africa",
                 "South Korea","Spain", "Sri Lanka", "Sweden","Switzerland","Thailand","Turkey","Ukraine","UAE","United Kingdom", "USA", "Uruguay",
                 "Venezuela"];
 }
