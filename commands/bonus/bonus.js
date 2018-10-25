@@ -68,7 +68,6 @@ module.exports = class CitizenCommand extends Command {
                                                 .filter(Boolean).length * 20
                                                 
                     countryBonus[i].averageBonus = (countryBonus[i].foodBonus + countryBonus[i].weaponBonus + countryBonus[i].houseBonus)/3
-                    console.log(countryBonus[i].name + " : " + countryBonus[i].averageBonus)
                 }
 
                 const embed = new RichEmbed()
@@ -84,6 +83,36 @@ module.exports = class CitizenCommand extends Command {
                         var fieldValue = "Food : " + countryBonus[i].foodBonus+" % | " +
                                         "Weapon : " + countryBonus[i].weaponBonus+" % | " +
                                         "House : " + countryBonus[i].houseBonus+" %"
+                        embed.addField(fieldName, fieldValue, false);
+                    }
+                    return msg.embed(embed);
+                }
+                else if(name === 'weapon'){
+                    countryBonus.sort((a,b) => (a.weaponBonus > b.weaponBonus) ? -1 : ((b.weaponBonus > a.weaponBonus) ? 1 : 0));
+                    embed .setDescription("Top 10 country for weapon bonuses")
+                    for(i = 1; i < 11; i++){
+                        var fieldName = i +". " + countryBonus[i].name
+                        var fieldValue = "Weapon bonus : " + countryBonus[i].weaponBonus+" %"
+                        embed.addField(fieldName, fieldValue, false);
+                    }
+                    return msg.embed(embed);
+                }
+                else if(name === 'food'){
+                    countryBonus.sort((a,b) => (a.foodBonus > b.foodBonus) ? -1 : ((b.foodBonus > a.foodBonus) ? 1 : 0));
+                    embed .setDescription("Top 10 country for food bonuses")
+                    for(i = 1; i < 11; i++){
+                        var fieldName = i +". " + countryBonus[i].name
+                        var fieldValue = "Food bonus : " + countryBonus[i].foodBonus+" %"
+                        embed.addField(fieldName, fieldValue, false);
+                    }
+                    return msg.embed(embed);
+                }
+                else if(name === 'house'){
+                    countryBonus.sort((a,b) => (a.houseBonus > b.houseBonus) ? -1 : ((b.houseBonus > a.houseBonus) ? 1 : 0));
+                    embed .setDescription("Top 10 country for house bonuses")
+                    for(i = 1; i < 11; i++){
+                        var fieldName = i +". " + countryBonus[i].name
+                        var fieldValue = "House bonus : " + countryBonus[i].houseBonus+" %"
                         embed.addField(fieldName, fieldValue, false);
                     }
                     return msg.embed(embed);
