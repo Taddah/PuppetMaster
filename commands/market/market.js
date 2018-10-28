@@ -1,5 +1,5 @@
 const { Command } = require('discord.js-commando');
-const { RichEmbed } = require('discord.js');
+const { RichEmbed, DMChannel } = require('discord.js');
 var request = require("request");
 var j = request.jar();
 var request = request.defaults({ jar : j })
@@ -16,6 +16,7 @@ module.exports = class MarketCommand extends Command {
             memberName: 'market',
             description: 'Get cheapest prices of specified product and quality',
             examples: ['market weapon q1'],
+            guildOnly: config.blockMarketDM,
             args: [
                 {
                     key: 'name',
@@ -57,7 +58,7 @@ module.exports = class MarketCommand extends Command {
             case "house": productId = 8; realName = 'House'; break;
             case "hospital": productId = 9; realName = 'Hospital'; break;
             case "ds": productId = 10; realName = 'Defense System'; break;
-            default: productId = 4; realName = 'Food'; break;
+            default: productId = -1; realName = 'Unknown'; break;
         }
 
         callback('https://www.erev2.com/en/market/'+countryId+'/'+productId+'/'+qualityId+'/1', realName, qualityId);
@@ -124,6 +125,7 @@ module.exports = class MarketCommand extends Command {
 
     run(msg, { name, quality }) 
     {
+        //No argument, return help
         if(name === 'null'){
             const embed = new RichEmbed()
                         .setTitle('Market help')
@@ -144,7 +146,18 @@ module.exports = class MarketCommand extends Command {
                                 .setColor(0x00AE86)
                                 .setTimestamp();
                     if(prices.length === 0){
-                        embed.addField("No product found", "So sell yours", true);
+                        embed.addField("No product found", "...", true);
+                    }
+                    //Product unknown, return help  | need to refactor that code ...
+                    else if(productName === 'Unknown'){
+                        const embed = new RichEmbed()
+                                    .setTitle('Market help')
+                                    .setColor(0x00AE86)
+                                    .setTimestamp();
+                        embed.addField('Product list : ', 'rawfood, rawweapon, food, weapon, house, hospital, ds');
+                        embed.addField('Quality : ', 'q1, q2, q3, q4, q5');
+                        embed.addField('Usage: ', 'market {product} {quality}')
+                        return msg.embed(embed);
                     }
                     else{
                         prices.sort((a,b) => (a.priceInGold > b.priceInGold) ? 1 : ((b.priceInGold > a.priceInGold) ? -1 : 0)); 
@@ -165,9 +178,6 @@ module.exports = class MarketCommand extends Command {
             catch(err) {
                 return msg.reply("An error occured ...");
             }
-            
         })
-
-        
     }
 };

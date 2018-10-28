@@ -74,6 +74,8 @@ module.exports = class CitizenCommand extends Command {
                                 .setTitle( msg.author.username)
                                 .setColor(0x00AE86)
                                 .setTimestamp();
+
+
                 //if all, then show top 10
                 if(name === 'all'){
                     countryBonus.sort((a,b) => (a.averageBonus > b.averageBonus) ? -1 : ((b.averageBonus > a.averageBonus) ? 1 : 0));
@@ -87,6 +89,8 @@ module.exports = class CitizenCommand extends Command {
                     }
                     return msg.embed(embed);
                 }
+
+                //If weapon bonuses
                 else if(name === 'weapon'){
                     countryBonus.sort((a,b) => (a.weaponBonus > b.weaponBonus) ? -1 : ((b.weaponBonus > a.weaponBonus) ? 1 : 0));
                     embed .setDescription("Top 10 country for weapon bonuses")
@@ -97,6 +101,8 @@ module.exports = class CitizenCommand extends Command {
                     }
                     return msg.embed(embed);
                 }
+
+                //If food bonuses
                 else if(name === 'food'){
                     countryBonus.sort((a,b) => (a.foodBonus > b.foodBonus) ? -1 : ((b.foodBonus > a.foodBonus) ? 1 : 0));
                     embed .setDescription("Top 10 country for food bonuses")
@@ -107,6 +113,8 @@ module.exports = class CitizenCommand extends Command {
                     }
                     return msg.embed(embed);
                 }
+
+                //if house bonuses
                 else if(name === 'house'){
                     countryBonus.sort((a,b) => (a.houseBonus > b.houseBonus) ? -1 : ((b.houseBonus > a.houseBonus) ? 1 : 0));
                     embed .setDescription("Top 10 country for house bonuses")
@@ -117,7 +125,11 @@ module.exports = class CitizenCommand extends Command {
                     }
                     return msg.embed(embed);
                 }
+
+                //Else it's for one specific country
                 else{
+
+                    //Look bad but does the job ¯\_(ツ)_/¯
                     if(name.includes("bosnia")) name = 'BiH'
                     else if(name.includes("macedonia")) name = 'FYROM'
                     else if(name.includes("america")) name = 'USA'
@@ -137,7 +149,6 @@ module.exports = class CitizenCommand extends Command {
 
                     return msg.reply("Country not found");
                 }
-                
             }
             else{
                 return msg.say('An error occured ...');

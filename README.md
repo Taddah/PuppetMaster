@@ -23,6 +23,7 @@ config.json example
   "token"  : "YOUR TOKEN",
   "prefix" : "/",
   "email" : "EMAIL OF YOUR ACCOUNT (use a fake ...)",
-  "password" : "YOUR PASSWORD"
+  "password" : "YOUR PASSWORD",
+  "blockMarketDM": true
 }
 ```
